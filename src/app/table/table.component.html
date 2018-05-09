@@ -1,56 +1,31 @@
+<table class="table">
+  <thead class="thead-dark">
+    <tr>
+      <th scope="col">ID</th>
+      <th scope="col">Driver Phone</th>
+      <th scope="col">Passenger Phone</th>
+      <th scope="col">Rating</th>
+      <th scope="col">Action</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let order of ordersShowing">
+      <th>{{order.order_id}}</th>
+      <td>{{order.driver_phone}}</td>
+      <td>{{order.pass_phone}}</td>
+      <td>
+        <i *ngFor="let star of Arr(order.rating).fill(1)"
+        class="material-icons star-active">star</i>
+        <i *ngFor="let star of Arr(maxRating - order.rating).fill(1)"
+        class="material-icons star-passive">star</i>
+      </td>
+      <td>
+        <a class="btn btn-success mr-1"
+           [routerLink]="['/'+order.order_id]">Edit</a>
+        <button type="button" class="btn btn-danger"
+                (click)="closeOrder(order.order_id)">Close</button>
+        </td>
+    </tr>
+  </tbody>
+</table>
 
-<ngx-datatable [rowHeight]="50"
-               [limit]="10"
-               [rows]="ordersShowing"
-               class="order-table">
-
-  <ngx-datatable-column name="Order" [width]="200">
-    <ng-template let-row="row"
-                 ngx-datatable-cell-template>
-      <span>{{ row.order_id }}</span>
-    </ng-template>
-  </ngx-datatable-column>
-
-  <ngx-datatable-column name="Driver Phone" [width]="200">
-    <ng-template let-row="row"
-                 ngx-datatable-cell-template>
-      <span>{{ row.driver_phone }}</span>
-    </ng-template>
-  </ngx-datatable-column>
-
-  <ngx-datatable-column name="Passenger Phone" [width]="200">
-    <ng-template let-row="row"
-                 ngx-datatable-cell-template>
-      <span>{{ row.pass_phone }}</span>
-    </ng-template>
-
-  </ngx-datatable-column>
-
-  <ngx-datatable-column name="Rating" [width]="200">
-    <ng-template let-row="row"
-                 ngx-datatable-cell-template>
-      <span class="row-element">
-        <i *ngFor="let star of Arr(row.rating).fill(1)"
-           class="material-icons star-active">star</i>
-        <i *ngFor="let star of Arr(maxRating - row.rating).fill(1)"
-           class="material-icons star-passive">star</i>
-      </span>
-    </ng-template>
-  </ngx-datatable-column>
-
-  <ngx-datatable-column name="Actions" [width]="200">
-    <ng-template let-row="row"
-                 ngx-datatable-cell-template>
-      <span class="row-element">
-        <span class="btn btn-close"
-              (click)="closeOrder(row.order_id)">Close</span>
-        <a class="btn btn-edit"
-           [routerLink]="['/'+row.order_id]">
-          <span>Show details</span>
-        </a>
-      </span>
-   </ng-template>
-
- </ngx-datatable-column>
-
-</ngx-datatable>

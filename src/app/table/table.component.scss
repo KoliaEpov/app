@@ -1,26 +1,7 @@
-$tableBgColor: #ffffff;
-$danger: #dc3545;
-$dangerHover: #c82333;
-$success: #28a745;
-$successHover: #218838;
-$border: solid 1px #e7e7e7;
-
-:host {
-  display: flex;
-  justify-content: center;
-  height: 100%;
-}
-
-.order-table {
-  max-width: 1000px;
+ul {
   width: 100%;
-  padding: 20px;
-  background-color: $tableBgColor;
-  border: $border;
-  box-shadow: 0 0 3px 0 rgba(0, 0, 1, 0.1);
-
-  .test {
-    background: red;
+  & > div {
+    width: inherit;
   }
 }
 
@@ -33,37 +14,3 @@ $border: solid 1px #e7e7e7;
     color: grey;
   }
 }
-
-.row-element {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  box-sizing: border-box;
-}
-
-.btn {
-  border-radius: 5px;
-  color: #fff;
-  margin: 0 10px;
-  cursor: pointer;
-  outline: none;
-  font-size: 13px;
-  text-decoration: none;
-  padding: 5px 10px;
-
-  &-edit {
-    background: $success;
-    &:hover{
-      background: $successHover;
-    }
-  }
-
-  &-close {
-    background: $danger;
-    &:hover{
-      background: $dangerHover;
-    }
-  }
-
-}
-

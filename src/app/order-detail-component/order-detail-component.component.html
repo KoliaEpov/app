@@ -2,34 +2,32 @@
 
   <form class="order" (ngSubmit)="handleSubmit()">
 
-    <p class="order-title">Order details</p>
+    <ul class="list-group">
+      <li class="list-group-item">
+        <span class="float-left">ID</span>
+        <span class="float-right">{{order.order_id}}</span>
+      </li>
+      <li class="list-group-item">
+        <span class="float-left">Driver Phone</span>
+        <span class="float-right">{{order.driver_phone}}</span>
+      </li>
+      <li class="list-group-item">
+        <span class="float-left">Passenger Phone</span>
+        <span class="float-right">{{order.pass_phone}}</span>
+      </li>
+    </ul>
 
-    <div class="order-properties">
-      <span>ID</span>
-      <span>{{order.order_id}}</span>
-    </div>
-
-    <div class="order-properties">
-      <span>Driver Phone</span>
-      <span>{{order.driver_phone}}</span>
-    </div>
-
-    <div class="order-properties">
-      <span>Passenger Phone</span>
-      <span>{{order.pass_phone}}</span>
-    </div>
-
-    <div class="order-properties">
-      <span>Rating</span>
-      <select #ratingElem
+    <div class="form-group">
+      <label for="rating">Rating</label>
+      <select class="form-control" id="rating"
               name="star"
-              (change)="setRating(ratingElem.value)"
-              class="order-properties-select">
+              #ratingElem
+              (change)="setRating(ratingElem.value)">
         <option *ngFor="let rating of ratingStars" ngValue="rating" [selected]="order.rating === rating">{{rating}}</option>
       </select>
     </div>
 
-    <button class="btn btn-submit" type="submit">Submit</button>
+    <button type="submit" class="btn btn-primary">Submit</button>
 
   </form>
 
