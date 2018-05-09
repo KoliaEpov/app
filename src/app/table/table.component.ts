@@ -1,5 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { Subscription } from 'rxjs/Rx';
+import { Subscription } from 'rxjs/Subscription';
+import { tap, catchError } from 'rxjs/operators';
+import { Observable } from 'rxjs/Observable';
 
 import { OrderService } from '../shared/order.service';
 import { Order } from '../shared/order.interface';
@@ -24,14 +26,17 @@ export class TableComponent implements OnInit, OnDestroy {
     this.initializeOrderList();
   }
   
-  initializeOrderList() {
-    this.subscription = this.orderService.getNewOrder().subscribe(
-      (data: Order) => {
-        this.orders.unshift(data);
-        this.setShowingOrders(this.orders);
-      },
-      (err: Error) => console.log(err)
-    );
+  initializeOrderList(): void {
+    this.subscription = this.orderService.getNewOrder().pipe(
+        tap((data: Order) => {
+          this.orders.unshift(data);
+          this.setShowingOrders(this.orders);
+        }),
+        catchError((error: Error) => {
+          console.log(error);
+          return Observable.throw(error);
+        })
+    ).subscribe();
   }
   
   closeOrder(orderId: number): void {
