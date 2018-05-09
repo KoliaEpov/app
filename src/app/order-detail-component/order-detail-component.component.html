@@ -1,0 +1,36 @@
+<div class="order-wrap">
+
+  <form class="order" (ngSubmit)="handleSubmit()">
+
+    <p class="order-title">Order details</p>
+
+    <div class="order-properties">
+      <span>ID</span>
+      <span>{{order.order_id}}</span>
+    </div>
+
+    <div class="order-properties">
+      <span>Driver Phone</span>
+      <span>{{order.driver_phone}}</span>
+    </div>
+
+    <div class="order-properties">
+      <span>Passenger Phone</span>
+      <span>{{order.pass_phone}}</span>
+    </div>
+
+    <div class="order-properties">
+      <span>Rating</span>
+      <select #ratingElem
+              name="star"
+              (change)="setRating(ratingElem.value)"
+              class="order-properties-select">
+        <option *ngFor="let rating of ratingStars" ngValue="rating" [selected]="order.rating === rating">{{rating}}</option>
+      </select>
+    </div>
+
+    <button class="btn btn-submit" type="submit">Submit</button>
+
+  </form>
+
+</div>
